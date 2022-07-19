@@ -11,23 +11,32 @@ var connect = pg.createPool({
     database: "d4ddj7altqepsr"
   });
 
-const client = new pg.Client(cs);
-
-client.connect();
-
-client.query('SELECT * FROM cars').then(res => {
-
-    const data = res.rows;
-
-    console.log('all data');
-    data.forEach(row => {
-        console.log(`Id: ${row.id} Name: ${row.name} Price: ${row.price}`);
-    })
-
-    console.log('Sorted prices:');
-    const prices = R.pluck('price', R.sortBy(R.prop('price'), data));
-    console.log(prices);
-
-}).finally(() => {
-    client.end()
+app.get('/', (req, res) => {
+res.send('hello world!');
+console.log('Running');
+});
+  
+app.get('/display', (req, res) => {
+var micro_username = req.query.username;
+  
+console.log("username: " + micro_username);
+  
+connect.getConnection(function (err, connection) {
+    if (err) { res.send('Error Database Connection'); }
+    else {
+        var sql = "SELECT * FROM donation";
+        connect.query(sql, function (err, result) {
+          if (err) { throw err; }
+          else {
+            res.send(result);
+          }
+        connection.release();
+        });
+      }
+    });
+    });
+  
+  
+app.listen(process.env.PORT, () => {
+    console.log('Example app listening to port 4005');
 });
