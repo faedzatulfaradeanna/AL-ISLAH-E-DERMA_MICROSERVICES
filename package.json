@@ -4,7 +4,8 @@
   "description": "list donation",
   "main": "microservice.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node microservice.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,12 @@
   },
   "homepage": "https://github.com/faedzatulfaradeanna/AL-ISLAH-E-DERMA_MICROSERVICES#readme",
   "dependencies": {
-    "express": "^4.18.1"
-  }
+    "express": "^4.18.1",
+    "pg": "^8.7.3",
+    "ramda": "^0.28.0"
+  },
+  "engines": {
+    "node": "16.16.0"
+  },
+  "keywords": []
 }
